@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SultanPilic.Data;
+using Sultan.DataAccess;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SultanPilic.Models;
+using Sultan.Models;
 using System.Diagnostics;
 
 namespace SultanPilic.Controllers

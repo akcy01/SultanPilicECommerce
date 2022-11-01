@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace SultanPilic.Models
+namespace Sultan.Models
 {
     public class Category
     {

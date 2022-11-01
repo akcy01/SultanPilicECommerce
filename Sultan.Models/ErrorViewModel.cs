@@ -1,4 +1,4 @@
-namespace SultanPilic.Models
+namespace Sultan.Models
 {
     public class ErrorViewModel
     {

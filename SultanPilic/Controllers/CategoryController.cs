@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SultanPilic.Data;
-using SultanPilic.Models;
+using Sultan.DataAccess;
+using Sultan.Models;
 
 namespace SultanPilic.Controllers
 {
@@ -39,7 +39,7 @@ namespace SultanPilic.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _dbContext.Categories.Find(id);
+            var categoryFromDb = _dbContext.Categories.FirstOrDefault(u => u.Name=="id");
 
             if(categoryFromDb == null)
             {

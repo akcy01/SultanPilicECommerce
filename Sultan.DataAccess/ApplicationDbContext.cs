@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SultanPilic.Models;
+using Sultan.Models;
 
-namespace SultanPilic.Data
+namespace Sultan.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {
