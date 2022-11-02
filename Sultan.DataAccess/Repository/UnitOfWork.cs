@@ -14,8 +14,10 @@ namespace Sultan.DataAccess.Repository
         {
             _dbContext = dbContext;
             Category = new CategoryRepository(_dbContext);
+            ChickType = new ChickTypeRepository(_dbContext);
         }
         public ICategoryRepository Category { get; private set; }
+        public IChickTypeRepository ChickType { get; private set; }
         public void Save()
         {
             _dbContext.SaveChanges();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sultan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Sultan.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IChickTypeRepository : IRepository<ChickType>
     {
-        ICategoryRepository Category { get; }
-        IChickTypeRepository ChickType { get; }
-        void Save();
+        void Update(ChickType chickType);
     }
 }
