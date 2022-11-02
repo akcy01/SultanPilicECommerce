@@ -1,5 +1,4 @@
 ﻿using Sultan.DataAccess.Repository.IRepository;
-using Sultan.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace Sultan.DataAccess.Repository
 {
-    public class CategoryRepository : Repository<Category>,ICategoryRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _dbContext;
-        public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public UnitOfWork(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            Category = new CategoryRepository(_dbContext);
         }
-        public void Update(Category category)
+        public ICategoryRepository Category { get; private set; }
+        public void Save()
         {
-            _dbContext.Categories.Update(category);
+            _dbContext.SaveChanges();
         }
     }
 }

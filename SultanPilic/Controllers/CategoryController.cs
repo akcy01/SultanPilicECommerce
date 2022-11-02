@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sultan.DataAccess;
+using Sultan.DataAccess.Repository.IRepository;
 using Sultan.Models;
 
 namespace SultanPilic.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
-        public CategoryController(ApplicationDbContext context)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _dbContext = context;   
+            _unitOfWork = unitOfWork;  
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList= _dbContext.Categories;
+            IEnumerable<Category> objCategoryList= _unitOfWork.Category.GetAll();
             return View(objCategoryList);
         }
         public IActionResult Create()
@@ -26,8 +27,8 @@ namespace SultanPilic.Controllers
         {
             if(ModelState.IsValid)
             {
-                _dbContext.Categories.Add(obj);
-                _dbContext.SaveChanges();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Kategori başarıyla oluşturuldu.";
                 return RedirectToAction("Index");
             }
@@ -39,13 +40,11 @@ namespace SultanPilic.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _dbContext.Categories.FirstOrDefault(u => u.Name=="id");
-
+            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             if(categoryFromDb == null)
             {
                 return NotFound();
             }
-
             return View(categoryFromDb);
         }
         [HttpPost]
@@ -54,8 +53,8 @@ namespace SultanPilic.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Categories.Update(obj);
-                _dbContext.SaveChanges();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Kategori başarıyla güncellendi.";
                 return RedirectToAction("Index");
             }
@@ -67,7 +66,7 @@ namespace SultanPilic.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _dbContext.Categories.Find(id);
+            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -78,13 +77,13 @@ namespace SultanPilic.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _dbContext.Categories.Find(id);
-            if(obj == null)
+            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            if (obj == null)
             {
                 return NotFound();
             }
-            _dbContext.Categories.Remove(obj);
-            _dbContext.SaveChanges();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Kategori başarıyla silindi";
             return RedirectToAction("Index");
         }
