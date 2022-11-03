@@ -20,5 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Sultan.DataAccess\Sultan.DataAccess.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Customer\Views\" />
+  </ItemGroup>
  <!--Yukarda kullanılan paketler yer alır-->
 </Project>
