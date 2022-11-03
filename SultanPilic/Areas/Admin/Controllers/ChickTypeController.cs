@@ -6,17 +6,17 @@ using Sultan.Models;
 namespace SultanPilic.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class ChickTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(IUnitOfWork unitOfWork)
+        public ChickTypeController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;  
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList= _unitOfWork.Category.GetAll();
-            return View(objCategoryList);
+            IEnumerable<ChickType> objChickTypeList= _unitOfWork.ChickType.GetAll();
+            return View(objChickTypeList);
         }
         public IActionResult Create()
         {
@@ -24,13 +24,13 @@ namespace SultanPilic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category obj)
+        public IActionResult Create(ChickType obj)
         {
             if(ModelState.IsValid)
             {
-                _unitOfWork.Category.Add(obj);
+                _unitOfWork.ChickType.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Kategori başarıyla oluşturuldu.";
+                TempData["success"] = "Tavuk çeşidi başarıyla oluşturuldu.";
                 return RedirectToAction("Index");
             }
                 return View(obj);
@@ -41,22 +41,22 @@ namespace SultanPilic.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
-            if(categoryFromDb == null)
+            var chickTypeFromDb = _unitOfWork.ChickType.GetFirstOrDefault(u => u.Id == id);
+            if(chickTypeFromDb == null)
             {
                 return NotFound();
             }
-            return View(categoryFromDb);
+            return View(chickTypeFromDb);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category obj)
+        public IActionResult Edit(ChickType obj)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Update(obj);
+                _unitOfWork.ChickType.Update(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Kategori başarıyla güncellendi.";
+                TempData["success"] = "Tavuk çeşidi başarıyla güncellendi.";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -67,25 +67,25 @@ namespace SultanPilic.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
-            if (categoryFromDb == null)
+            var chickTypeFromDb = _unitOfWork.ChickType.GetFirstOrDefault(u => u.Id == id);
+            if (chickTypeFromDb == null)
             {
                 return NotFound();
             }
-            return View(categoryFromDb);
+            return View(chickTypeFromDb);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = _unitOfWork.ChickType.GetFirstOrDefault(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.ChickType.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Kategori başarıyla silindi";
+            TempData["success"] = "Tavuk çeşidi başarıyla silindi";
             return RedirectToAction("Index");
         }
     }

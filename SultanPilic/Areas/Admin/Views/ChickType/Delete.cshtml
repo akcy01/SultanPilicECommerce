@@ -1,0 +1,27 @@
+﻿@model ChickType
+@*asp-validation-for sayesinde hata kodunu ekrana yazdırız*@
+@*Biz her validation işlemi yaptığımızda yani her hatayı ekrana yazdırdığımızda sayfa yeniden yüklenir ve bu da boşuna güç kullanır.Buna engel olmak için _ValidationScriptsPartial.cshtml dosyasını kullanırız.Aşağıya bunu eklediğimizde artık hata ekrana yazıldığında server tarafında bir yenilenme gerçekleşmeyecek.Hata direkt önümüze gelecek.Buna client side validation denir.*@
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden/> @*Id'yi almak için yaptık bunu ve sonra sakladık*@
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Tavuk Çeşidi Sil</h2>
+            <hr />
+        </div>
+        <div class="mb-3" >
+            <label asp-for="Name"></label>
+            <input asp-for="Name" disabled class="form-control"/>
+        </div>
+        <button type = "submit" class="btn btn-danger" style="width:150px" >Sil</button>
+        <a asp-controller="ChickType" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Listeye Geri Dön
+        </a>
+    </div>
+</form>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ChickType>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Tavuk Çeşidi Listesi </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="ChickType" asp-action="Create" class="btn btn-primary">
+              <i class="bi bi-plus-circle"></i> &nbsp; Yeni Tavuk Çeşidi Oluştur
+            </a>
+        </div>
+    </div>
+    <br />
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Kategori Adı
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+           <tr>
+               <th>
+                   @obj.Name
+               </th>
+               <th>
+                   <div class="w-75 btn-group" role="group">
+                       <a asp-controller="ChickType" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Düzenle</a>
+                        <a asp-controller="ChickType" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2"> <i class="bi bi-trash3"></i> Sil</a>
+                   </div>
+               </th>
+           </tr>
+        }
+    </tbody>
+</table>
+</div>
