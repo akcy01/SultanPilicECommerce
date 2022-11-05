@@ -10,5 +10,6 @@ namespace Sultan.DataAccess
         }
        public DbSet<Category> Categories { get; set; }
        public DbSet<ChickType> ChickTypes { get; set; }
+       public DbSet<Product> Products { get; set; }
     }
 }

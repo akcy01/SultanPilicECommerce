@@ -1,0 +1,41 @@
+﻿@model Product
+
+<form method="post" asp-action="Upsert">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Ürünü Düzenle</h2>
+            <hr />
+        </div>
+        <div class="mb-3" >
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control"/>
+            <span asp-validation-for="Title" class="text-danger"></span>  
+        </div>
+        <div class="mb-3" >
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>  
+        </div>
+        <div class="mb-3" >
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control"/>
+            <span asp-validation-for="Price" class="text-danger"></span>  
+        </div>
+        <div class="mb-3" >
+            <label asp-for="ListPrice"></label>
+            <input asp-for="ListPrice" class="form-control"/>
+            <span asp-validation-for="ListPrice" class="text-danger"></span>  
+        </div>
+        <button type = "submit" class="btn btn-primary" style="width:150px" >Güncelle</button>
+        <a asp-controller="ChickType" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Listeye Geri Dön
+        </a>
+    </div>
+</form>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

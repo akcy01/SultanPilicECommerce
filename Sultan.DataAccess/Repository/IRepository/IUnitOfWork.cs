@@ -10,6 +10,7 @@ namespace Sultan.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IChickTypeRepository ChickType { get; }
+        IProductRepository Product { get; }
         void Save();
     }
 }
