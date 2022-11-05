@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Sultan.DataAccess;
 using Sultan.DataAccess.Repository.IRepository;
 using Sultan.Models;
+using System.Collections.Generic;
 
 namespace SultanPilic.Controllers
 {
@@ -21,9 +23,23 @@ namespace SultanPilic.Controllers
        
         public IActionResult Upsert(int? id)
         {
+            /* Aşağıda tanımladığımız IEnumerable'lar ile ilişkisel bir yapı kurduk.Kategori ile ürün arasında. */
             Product product = new();
-            if(id == null || id == 0)
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(c => new SelectListItem
             {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
+            IEnumerable<SelectListItem> ChickTypeList = _unitOfWork.ChickType.GetAll().Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
+
+            if (id == null || id == 0)
+            {
+                ViewBag.CategoryList = CategoryList;
+                ViewData["ChickTypeList"] = ChickTypeList;
                 return View(product);
             }
             else

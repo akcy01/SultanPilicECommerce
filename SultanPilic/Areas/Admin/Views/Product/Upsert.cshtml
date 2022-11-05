@@ -26,6 +26,21 @@
             <input asp-for="ListPrice" class="form-control"/>
             <span asp-validation-for="ListPrice" class="text-danger"></span>  
         </div>
+         <div class="mb-3" >
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
+                <option disabled selected>Kategori Seç</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>  
+        </div>
+
+        <div class="mb-3" >
+            <label asp-for="ChickTypeId"></label>
+            <select asp-for="ChickTypeId" asp-items="@(ViewData["CoverTypeList"] as IEnumerable<SelectListItem>)"     class="form-select">
+                <option disabled selected>Tavuk Tipi Seç</option>
+            </select>
+            <span asp-validation-for="ChickTypeId" class="text-danger"></span>  
+        </div>
         <button type = "submit" class="btn btn-primary" style="width:150px" >Güncelle</button>
         <a asp-controller="ChickType" asp-action="Index" class="btn btn-secondary" style="width:150px">
             Listeye Geri Dön
