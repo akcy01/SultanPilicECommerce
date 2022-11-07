@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Sultan.DataAccess;
 using Sultan.DataAccess.Repository.IRepository;
 using Sultan.Models;
+using Sultan.Models.ViewModels;
 using System.Collections.Generic;
 
 namespace SultanPilic.Controllers
@@ -23,30 +24,32 @@ namespace SultanPilic.Controllers
        
         public IActionResult Upsert(int? id)
         {
-            /* Aşağıda tanımladığımız IEnumerable'lar ile ilişkisel bir yapı kurduk.Kategori ile ürün arasında. */
-            Product product = new();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(c => new SelectListItem
+            ProductVM productVM = new()
             {
-                Text = c.Name,
-                Value = c.Id.ToString()
-            });
-            IEnumerable<SelectListItem> ChickTypeList = _unitOfWork.ChickType.GetAll().Select(c => new SelectListItem
-            {
-                Text = c.Name,
-                Value = c.Id.ToString()
-            });
+                Product = new(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+                ChickTypeList = _unitOfWork.ChickType.GetAll().Select(i => new SelectListItem
+                {
+                    Text=i.Name,
+                    Value=i.Id.ToString()
+                }),
+            };
 
             if (id == null || id == 0)
             {
-                ViewBag.CategoryList = CategoryList;
-                ViewData["ChickTypeList"] = ChickTypeList;
-                return View(product);
+            //    ViewBag.CategoryList = CategoryList;
+            //    ViewData["ChickTypeList"] = ChickTypeList;
+                return View(productVM);
             }
             else
             {
 
             }
-            return View();
+            return View(productVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
