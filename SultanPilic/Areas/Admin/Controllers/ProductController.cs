@@ -53,11 +53,11 @@ namespace SultanPilic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Category obj)
+        public IActionResult Upsert(ProductVM obj , IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Update(obj);
+                //_unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Kategori başarıyla güncellendi.";
                 return RedirectToAction("Index");

@@ -1,7 +1,7 @@
 ﻿@model Sultan.Models.ViewModels.ProductVM
 
-<form method="post" asp-action="Upsert">
-    <div class="border p-3 mt-4">
+<form method="post" asp-action="Upsert" enctype="multipart/form-data"> @*enctype olmadan image upload edemezsin*@
+    <div class="border p-3 mt-4 row">
         <div class="row pb-2">
             <h2 class="text-primary">Ürünü Düzenle</h2>
             <hr />
@@ -16,17 +16,21 @@
             <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
             <span asp-validation-for="Product.Description" class="text-danger"></span>  
         </div>
-        <div class="mb-3" >
+        <div class="mb-3 col-6" >
             <label asp-for="Product.Price"></label>
             <input asp-for="Product.Price" class="form-control"/>
             <span asp-validation-for="Product.Price" class="text-danger"></span>  
         </div>
-        <div class="mb-3" >
+        <div class="mb-3 col-6" >
             <label asp-for="Product.ListPrice"></label>
             <input asp-for="Product.ListPrice" class="form-control"/>
             <span asp-validation-for="Product.ListPrice" class="text-danger"></span>  
         </div>
-         <div class="mb-3" >
+        <div class="mb-3 col-6">
+            <label asp-for="Product.ImageUrl"></label>
+            <input type="file" class="form-control" />
+        </div>
+         <div class="mb-3 col-6" >
             <label asp-for="Product.CategoryId"></label>
             <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
                 <option disabled selected>Kategori Seç</option>
@@ -34,17 +38,19 @@
             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>  
         </div>
 
-        <div class="mb-3" >
+        <div class="mb-3 col-6" >
             <label asp-for="Product.ChickTypeId"></label>
             <select asp-for="Product.ChickTypeId" asp-items="Model.ChickTypeList" class="form-select">
                 <option disabled selected>Tavuk Tipi Seç</option>
             </select>
             <span asp-validation-for="Product.ChickTypeId" class="text-danger"></span>  
         </div>
-        <button type = "submit" class="btn btn-primary" style="width:150px" >Güncelle</button>
-        <a asp-controller="ChickType" asp-action="Index" class="btn btn-secondary" style="width:150px">
-            Listeye Geri Dön
-        </a>
+        <div>
+            <button type="submit" class="btn btn-primary" style="width:150px">Güncelle</button>
+            <a asp-controller="ChickType" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Listeye Geri Dön
+            </a>
+        </div>  
     </div>
 </form>
 
