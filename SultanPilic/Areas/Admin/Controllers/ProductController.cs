@@ -12,9 +12,11 @@ namespace SultanPilic.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork,IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;  
+            _hostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
         {
@@ -53,10 +55,17 @@ namespace SultanPilic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ProductVM obj , IFormFile file)
+        public IActionResult Upsert(ProductVM obj , IFormFile file) //IFormFile dosya yüklememizi sağlar.
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                if(file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();//Benzersiz bir dosya adı oluşturmak için bunu yaptık.
+                    var uploads = Path.Combine(wwwRootPath, @"Images\Products");//Yüklenen görselin gideceği klasörü belirttik.
+                    
+                }
                 //_unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Kategori başarıyla güncellendi.";

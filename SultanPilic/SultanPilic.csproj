@@ -20,5 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Sultan.DataAccess\Sultan.DataAccess.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Products\" />
+  </ItemGroup>
  <!--Yukarda kullanılan paketler yer alır-->
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,9 +20,11 @@ namespace Sultan.Models
         public string ImageUrl { get; set; }
         [Required]
         public int CategoryId { get; set; }
+        [ValidateNever]
         public Category Category { get; set; }
         [Required]
         public int ChickTypeId { get; set; }
+        [ValidateNever]
         public ChickType ChickType { get; set; }
 
 
