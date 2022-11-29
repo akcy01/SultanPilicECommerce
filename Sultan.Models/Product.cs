@@ -17,6 +17,7 @@ namespace Sultan.Models
         public string Description { get; set; }
         public double ListPrice { get; set; }
         public double Price { get; set; }
+        [ValidateNever]
         public string ImageUrl { get; set; }
         [Required]
         public int CategoryId { get; set; }

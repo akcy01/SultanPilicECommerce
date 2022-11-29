@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Sultan.DataAccess;
+using Sultan.DataAccess.Repository;
 using Sultan.DataAccess.Repository.IRepository;
 using Sultan.Models;
 using Sultan.Models.ViewModels;
@@ -20,10 +21,8 @@ namespace SultanPilic.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Product> objCategoryList= _unitOfWork.Product.GetAll();
-            return View(objCategoryList);
+            return View();
         }
-       
         public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new()
@@ -63,14 +62,14 @@ namespace SultanPilic.Controllers
                 if(file != null)
                 {
                     string fileName = Guid.NewGuid().ToString();//Benzersiz bir dosya adı oluşturmak için bunu yaptık.
-                    var uploads = Path.Combine(wwwRootPath, @"Images\Products");//Yüklenen görselin gideceği klasörü belirttik.
+                    var uploads = Path.Combine(wwwRootPath, @"images\products");//Yüklenen görselin gideceği klasörü belirttik.
                     var extension = Path.GetExtension(file.FileName);//Uzantıları test ettik burada.
 
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))  //FileStream yeni bir dosya oluşturmak için kullanılır.
                     {
                         file.CopyTo(fileStreams);
                     }
-                    obj.Product.ImageUrl = @"Images\Products\" + fileName + extension;
+                    obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
                 }
                 //Burdan yukarısında file ekleme işlemi yaptık.
                 _unitOfWork.Product.Add(obj.Product);
@@ -107,5 +106,13 @@ namespace SultanPilic.Controllers
             TempData["success"] = "Kategori başarıyla silindi";
             return RedirectToAction("Index");
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var productList = _unitOfWork.Product.GetAll();
+            return Json(new {data = productList});
+        }
+        #endregion
     }
 }
