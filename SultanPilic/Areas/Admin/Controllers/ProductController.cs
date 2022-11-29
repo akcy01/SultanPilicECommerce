@@ -64,11 +64,18 @@ namespace SultanPilic.Controllers
                 {
                     string fileName = Guid.NewGuid().ToString();//Benzersiz bir dosya adı oluşturmak için bunu yaptık.
                     var uploads = Path.Combine(wwwRootPath, @"Images\Products");//Yüklenen görselin gideceği klasörü belirttik.
-                    
+                    var extension = Path.GetExtension(file.FileName);//Uzantıları test ettik burada.
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))  //FileStream yeni bir dosya oluşturmak için kullanılır.
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    obj.Product.ImageUrl = @"Images\Products\" + fileName + extension;
                 }
-                //_unitOfWork.Category.Update(obj);
+                //Burdan yukarısında file ekleme işlemi yaptık.
+                _unitOfWork.Product.Add(obj.Product);
                 _unitOfWork.Save();
-                TempData["success"] = "Kategori başarıyla güncellendi.";
+                TempData["success"] = "Ürün başarıyla eklendi.";
                 return RedirectToAction("Index");
             }
             return View(obj);
