@@ -20,10 +20,12 @@ namespace Sultan.Models
         [ValidateNever]
         public string ImageUrl { get; set; }
         [Required]
+        [Display(Name ="Kategori")]
         public int CategoryId { get; set; }
         [ValidateNever]
         public Category Category { get; set; }
         [Required]
+        [Display(Name ="Tavuk Tipi")]
         public int ChickTypeId { get; set; }
         [ValidateNever]
         public ChickType ChickType { get; set; }
