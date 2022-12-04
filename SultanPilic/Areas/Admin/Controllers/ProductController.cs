@@ -65,14 +65,30 @@ namespace SultanPilic.Controllers
                     var uploads = Path.Combine(wwwRootPath, @"images\products");//Yüklenen görselin gideceği klasörü belirttik.
                     var extension = Path.GetExtension(file.FileName);//Uzantıları test ettik burada.
 
+                    if(obj.Product.ImageUrl!= null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath,obj.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath); //Görseli güncelleyebilmek için öncelikle varolanı silmeliyiz.Burada o işlemi gerçekleştirdim.
+                        }
+                    }
+
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))  //FileStream yeni bir dosya oluşturmak için kullanılır.
                     {
                         file.CopyTo(fileStreams);
                     }
                     obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
                 }
+                if (obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
                 //Burdan yukarısında file ekleme işlemi yaptık.
-                _unitOfWork.Product.Add(obj.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Ürün başarıyla eklendi.";
                 return RedirectToAction("Index");
