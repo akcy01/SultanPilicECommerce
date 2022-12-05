@@ -95,7 +95,6 @@ namespace SultanPilic.Controllers
             }
             return View(obj);
         }
-
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
@@ -122,7 +121,7 @@ namespace SultanPilic.Controllers
             _unitOfWork.Save();
             return Json(new { success = true, message = "Başarıyla silindi" });
         }
+        #endregion
     }
-    #endregion
 }
 
