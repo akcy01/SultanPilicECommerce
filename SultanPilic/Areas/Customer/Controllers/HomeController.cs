@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sultan.DataAccess.Repository.IRepository;
 using Sultan.Models;
-using Sultan.Models.ViewModels;
 using System.Diagnostics;
 using System.Security.Policy;
 
