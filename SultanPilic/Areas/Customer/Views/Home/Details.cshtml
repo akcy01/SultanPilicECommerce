@@ -6,7 +6,7 @@
         <div class="card-header bg-primary text-light ml-0  row ">
             <div class="col-12 col-md-6">
                 <h1 class="text-white-50">@Model.product.Title</h1>
-                <p class="text-warning">by @Model.product.Description</p>
+                @*<p class="text-warning">by @Model.product.Description</p>*@
             </div>
             <div class="col-12 col-md-6 text-end pt-4">
                 <span class="badge bg-info pt-2" style="height:30px;">@Model.product.ChickType.Name</span>
@@ -20,11 +20,11 @@
 
                        @* <div class="row pl-2">
                            @* <h5 class="text-muted">ISBN : @Model.product.</h5>*@
-                        </div>
+                        @*</div>*@
                         <div class="row pl-2">
-                            <h5 class="text-muted pb-2">List Price: <strike>@Model.product.ListPrice.ToString("c")</strike></h5>
+                            <h5 class="text-muted pb-2">Liste Fiyatı: <strike>@Model.product.ListPrice.ToString("c")</strike></h5>
                         </div>
-                        <div class="row text-center pl-2">
+                        @*<div class="row text-center pl-2">
                             @*<div class="p-1 col-2 bg-secondary border-bottom">
                                 <div>Quantity</div>
                             </div>
@@ -37,10 +37,10 @@
                             <div class="p-1 col-2 bg-secondary border-bottom">
                                 <div>100+</div>
                             </div>*@
-                        </div>
+                        @*</div>*@
                         <div class="row text-center pl-2" style="color:maroon; font-weight:bold">
                             <div class="p-1 col-2 bg-secondary">
-                                <div>Price</div>
+                                <div>Fiyat</div>
                             </div>
                             <div class="p-1 col-2 bg-secondary">
                                 <div>@Model.product.Price.ToString("c")</div>
@@ -63,10 +63,10 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col-12 col-md-6 pb-1">
-                    <a class="btn btn-success form-control " style="height:50px;" asp-action="Index">Back to Home</a>
+                    <a class="btn btn-success form-control " style="height:50px;" asp-action="Index">Ana Sayfaya Dön</a>
                 </div>
                 <div class="col-12 col-md-6 pb-1">
-                    <button type="submit" value="Add to Cart" class="btn btn-primary form-control" style="height:50px;">Add to Cart</button>
+                    <button type="submit" value="Add to Cart" class="btn btn-primary form-control" style="height:50px;">Sepete Ekle</button>
                 </div>
             </div>
         </div>
